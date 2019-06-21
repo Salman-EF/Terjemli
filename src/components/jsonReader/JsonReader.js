@@ -3,7 +3,6 @@ import React, {Component} from 'react'
 class JsonReader extends Component {
 
     componentDidMount() {
-        console.log('JsonReader is here')
     }
 
     render() {
