@@ -1,15 +1,19 @@
+/* eslint-disable default-case */
 import React, {Component} from 'react';
 import './JsonReader.scss';
+
+import TranslateService from './TranslateService.js'
 
 class JsonReader extends Component {
 
     constructor() {
         super();
-        this.fileReader = new FileReader();
         this.state = {
             isJson: null,
             file: null
         }
+        this.fileReader = new FileReader();
+        this.translateService = new TranslateService();
     }
 
     formatVerify = (file) => {
@@ -30,7 +34,10 @@ class JsonReader extends Component {
             this.fileReader.readAsText(this.state.file);
             this.fileReader.onload = (event) => {
                 const content = JSON.parse(event.target.result);
-                console.log(content)
+                console.log(JSON.parse(event.target.result))
+                this.translateService.iterate(content).then(obj => {
+                    console.log(obj)
+                });
             };
         } else {
             console.log("No file")
