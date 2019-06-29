@@ -9,12 +9,29 @@ class TranslateService {
                     return;
                 }
                 if (typeof obj[key] === 'string') {
-                    obj[key] = "WTF";
+                    $this.translate(obj[key]).then(trsl => {
+                        obj[key] = trsl;
+                    });
                 }
             })
             resolve(obj);
         })
 
+    }
+
+    translate = (text) => {
+        new Promise((resolve,reject) => {
+            const translate = require('google-translate-api');
+    
+            translate(text, {to: 'en'}).then(res => {
+                console.log(res.text);
+                resolve(res.text);
+                // console.log(res.from.language.iso);
+                //=> nl
+            }).catch(err => {
+                reject(err);
+            });
+        })
     }
 
 }
