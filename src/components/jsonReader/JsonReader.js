@@ -1,4 +1,3 @@
-/* eslint-disable default-case */
 import React, {Component} from 'react';
 import './JsonReader.scss';
 
